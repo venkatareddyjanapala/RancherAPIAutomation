@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 public class RestAssuredClient {
     static Logger log = Logger.getLogger(RestAssuredClient.class);
 
-    public  static Response getMethod(String endpoint) {
+    public static Response getMethod(String endpoint) {
 
         //using Requestspecification class
         RequestSpecification requestSpecification = RestAssured.given().relaxedHTTPSValidation();
@@ -18,16 +18,18 @@ public class RestAssuredClient {
         return requestSpecification.get(endpoint).then().log().all().and().extract().response();
     }
 
-    public  Response postMethod(String baseURI, JSONObject json) {
+    public Response postMethod(String baseURI, JSONObject json) {
 
         log.info("====================URL is " + baseURI);
         log.info("====================Request is " + json.toString());
-        return RestAssured.given().relaxedHTTPSValidation()
+        Response response = RestAssured.given().relaxedHTTPSValidation()
                 .header("Content-Type", "application/json")
                 .body(json.toJSONString())
                 .when().post(baseURI)
                 .then()
                 .and().log().all()
                 .extract().response();
+       log.info("====================Response is " + response.toString());
+        return response;
     }
 }
