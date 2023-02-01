@@ -1,6 +1,6 @@
 package LoginTests;
 
-import com.restassured.core.LoginHelper;
+import com.restassured.core.helpers.LoginHelper;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;

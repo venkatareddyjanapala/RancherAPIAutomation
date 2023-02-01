@@ -1,4 +1,4 @@
-package com.restassured.core;
+package com.restassured.core.common;
 
 import com.restassured.utils.ConfigProperties;
 

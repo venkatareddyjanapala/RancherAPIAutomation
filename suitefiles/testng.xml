@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Api-TestSuite" verbose="1"  parallel="none">
-    <test name="Api-TestSuite" preserve-order="true" verbose="1"  parallel="none">
+<suite name="rancher-suite">
+    <test verbose="2" preserve-order="true" name="rancher-suite">
         <classes>
-            <class name="src.test.java.testApi"/>
-
+            <class name="test."/>
         </classes>
     </test>
 </suite>
