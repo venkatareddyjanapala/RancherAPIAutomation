@@ -1,10 +1,11 @@
 <h1>API automation framework using RestAssured.</h1>
 
 <h2>Modules Used:</h2>
-* io.rest-assured 
-* Testng
-* Log4J
-
+<ol>
+<li>io.rest-assured </li> 
+<li>Testng</li> 
+<li> Log4J</li> 
+</ol>
 <h2>Run Configuration:</h2>
 To run entire suite:
 <code>
