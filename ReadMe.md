@@ -18,13 +18,15 @@ To run individual TestClass:
 <PATH>/RancherAPIAutomation/src/test/java/LoginTests/LoginTests -ea -Denv.type=QA
 </code>
 <h2>Folder Structure:</h2>
-src->main (Main class files)
+<ol>
+<li>src->main (Main class files)</li>
 
-common -> contains all base classes (contains abstraction methods)
-rest -> RestClient with all the rest methods(GET,POST,PUT,DELETE)
-Extent Reports -> For generation of reports
-helpers -> Contains all  helper classes
-Utils -> all Utility Classed
-src->test
-TestBase-> base test class
-LoginTests -> Contains all test classes having tests around login API's
+<li>common -> contains all base classes (contains abstraction methods)</li>
+<li>rest -> RestClient with all the rest methods(GET,POST,PUT,DELETE)</li>
+<li>Extent Reports -> For generation of reports</li>
+<li>helpers -> Contains all  helper classes</li>
+<li>Utils -> all Utility Classed</li>
+<li>src->test</li>
+<li>TestBase-> base test class</li>
+<li>LoginTests -> Contains all test classes having tests around login APIs</li>
+</ol>
