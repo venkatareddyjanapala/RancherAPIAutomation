@@ -3,7 +3,7 @@
 <suite name="rancher-suite">
     <test verbose="2" preserve-order="true" name="rancher-suite">
         <classes>
-            <class name="test."/>
+            <class name="LoginTests.LoginTests"/>
         </classes>
     </test>
 </suite>
