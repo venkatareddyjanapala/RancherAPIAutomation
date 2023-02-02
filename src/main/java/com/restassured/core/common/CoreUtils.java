@@ -10,35 +10,18 @@ public abstract class CoreUtils {
     static Logger log = Logger.getLogger(RestAssuredClient.class);
 
     public String getEnvironmentURL() {
-        if (System.getProperty("env.type").equals("QA")) {
-            return configProperties.getConfig("QA_BASE_URI") + ":" + getPortNumber();
-        } else {
-            return null;
-        }
+        return configProperties.getConfig("QA_BASE_URI")+":"+configProperties.getConfig("QA_PORTNUMBER");
     }
 
     private String getPortNumber() {
-        if (System.getProperty("env.type").equals("QA")) {
-            return configProperties.getConfig("QA_PORTNUMBER");
-        }
-        return null;
+        return configProperties.getConfig("QA_PORTNUMBER");
     }
 
     public String getUserName() {
-        if (System.getProperty("env.type").equals("QA")) {
-            log.info("user name is:" + configProperties.getConfig("QA_USERNAME"));
-            return configProperties.getConfig("QA_USERNAME");
-        } else {
-            return null;
-        }
+        return configProperties.getConfig("QA_USERNAME");
     }
 
     public String getPassword() {
-        if (System.getProperty("env.type").equals("QA")) {
-            log.info("Password is:" + configProperties.getConfig("QA_PASSWORD"));
-            return configProperties.getConfig("QA_PASSWORD");
-        } else {
-            return null;
-        }
+       return configProperties.getConfig("QA_PASSWORD");
     }
 }
