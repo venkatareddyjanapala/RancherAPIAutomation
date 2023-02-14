@@ -3,15 +3,17 @@ package com.restassured.core.helpers;
 import com.restassured.core.common.CoreUtils;
 import com.restassured.core.rest.RestAssuredClient;
 import io.restassured.response.Response;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+
+@Slf4j
 public class LoginHelper extends CoreUtils {
     public String URL;
     public String userName;
     public String password;
     public RestAssuredClient restClient = new RestAssuredClient();
-    Logger log = Logger.getLogger(LoginHelper.class);
 
     public void getEnvironmentDetails(){
         this.URL = getEnvironmentURL();
@@ -25,6 +27,11 @@ public class LoginHelper extends CoreUtils {
         log.info("the API Request URL is:" + baseURI);
         JSONObject requestParams = new JSONObject();
         String userCode=userName+":"+password;
+
+        HashMap<String,String> requestMap = new HashMap<>();
+        requestMap.put("authProvider", "localauthconfig");
+        requestMap.put("code", userCode);
+
         requestParams.put("authProvider", "localauthconfig");
         requestParams.put("code", userCode);
         Response response = restClient.postMethod(baseURI,requestParams);

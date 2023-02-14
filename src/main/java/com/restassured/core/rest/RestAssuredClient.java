@@ -3,11 +3,11 @@ package com.restassured.core.rest;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 
+@Slf4j
 public class RestAssuredClient {
-    static Logger log = Logger.getLogger(RestAssuredClient.class);
 
     public static Response getMethod(String endpoint) {
 

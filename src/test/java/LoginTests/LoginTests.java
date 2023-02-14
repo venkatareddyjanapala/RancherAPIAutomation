@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class LoginTests extends TestBase {
     LoginHelper loginHelper = new LoginHelper();
 
-    @Test()
+    @Test(description = "verifyLogin")
     public void verifyLogin() {
         loginHelper.getEnvironmentDetails();
         Response response = loginHelper.getLogin();
