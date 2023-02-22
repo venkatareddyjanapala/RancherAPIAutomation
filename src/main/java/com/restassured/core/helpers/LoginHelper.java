@@ -1,8 +1,10 @@
 package com.restassured.core.helpers;
 
 import com.restassured.core.common.CoreUtils;
+import com.restassured.core.rest.GenericRequestBuilder;
 import com.restassured.core.rest.RestAssuredClient;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONObject;
 
@@ -16,17 +18,16 @@ public class LoginHelper extends CoreUtils {
     public String userName;
     public String password;
     public RestAssuredClient restClient = new RestAssuredClient();
-
     public void getEnvironmentDetails(){
-        this.URL = getEnvironmentURL();
+       // this.URL = getEnvironmentURL();
         this.userName= getUserName();
         this.password= getPassword();
-        this.port=getPortNumber();
+       // this.port=getPortNumber();
     }
 
     public Response getLogin(){
-        log.info("THe URL Is:"+ URL);
-        String baseURI = URL+ LoginConstants.login;
+       // log.info("THe URL Is:"+ URL);
+        String baseURI = LoginConstants.login;
         log.info("the API Request URL is:" + baseURI);
         JSONObject requestParams = new JSONObject();
         String userCode=userName+":"+password;

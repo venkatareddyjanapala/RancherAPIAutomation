@@ -20,15 +20,16 @@ public  static ConfigProperties configProperties = ConfigProperties.getInstance(
     public static RequestSpecification getRequestSpecificationObject() {
         requestSpecBuilder.setRelaxedHTTPSValidation();
         requestSpecBuilder.setPort(Integer.parseInt(getPort()));
-        requestSpecBuilder.setBasePath(getBasePath());
+        requestSpecBuilder.setBaseUri(getBasePath());
+        requestSpecBuilder.setBasePath("/v2-beta/");
         requestSpecBuilder.addHeader("content-type", "application/json");
         requestSpecBuilder.addHeader("accept","application/json");
         return requestSpecBuilder.build();
     }
     public  static Response requestCall(RequestSpecification requestSpecification, Method method, String uri) {
         log.info("");
-           Response responseData = RestAssured.given().spec(requestSpecification).log().all().request(method, uri);
-           System.out.println("CURL REQUEST --> " + getCurl(requestSpecification));
+        Response responseData = RestAssured.given().spec(requestSpecification).log().all().request(method, uri);
+        System.out.println("CURL REQUEST --> " + getCurl(requestSpecification));
         return responseData;
     }
     public static String getCurl(RequestSpecification requestSpecification) {

@@ -1,7 +1,5 @@
 package com.restassured.core.rest;
 
-import com.restassured.core.common.CoreUtils;
-import com.restassured.core.helpers.LoginHelper;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -24,14 +22,9 @@ public class RestAssuredClient {
         log.info("====================URL is " + baseURI);
         log.info("====================Request is " + jsonReqBody.toJSONString());
         requestSpecification.body(jsonReqBody.toString());
-        requestSpecification.baseUri(baseURI);
         Response response = requestCall(requestSpecification, Method.POST, baseURI);
-        // Response response = requestSpecification.log().all().request(Method.POST, baseURI);
 
         log.info("====================Response is " + response.prettyPrint());
-        //String json = response.asString();
-       // System.out.println("returned json: " + json);
-        //return new JsonPath(json);
         return response;
     }
 }

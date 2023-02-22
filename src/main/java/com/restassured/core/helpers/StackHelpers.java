@@ -5,7 +5,6 @@ import com.restassured.core.common.CoreUtils;
 import com.restassured.core.rest.GenericRequestBuilder;
 import io.harness.rest.utils.JsonFileReader;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 
 import java.io.FileNotFoundException;
 
