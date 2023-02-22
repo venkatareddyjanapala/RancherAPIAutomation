@@ -30,6 +30,8 @@ public  static ConfigProperties configProperties = ConfigProperties.getInstance(
         log.info("");
         Response responseData = RestAssured.given().spec(requestSpecification).log().all().request(method, uri);
         System.out.println("CURL REQUEST --> " + getCurl(requestSpecification));
+        System.out.println("Response  --> " + responseData.prettyPrint());
+
         return responseData;
     }
     public static String getCurl(RequestSpecification requestSpecification) {
@@ -48,6 +50,17 @@ public  static ConfigProperties configProperties = ConfigProperties.getInstance(
     public static Response postCall(JsonObject jsonObject, String projectId,String uri) {
         RequestSpecification requestSpecification = getRequestSpecificationObject();
         requestSpecification.pathParam("projectId",projectId);
+        requestSpecification.body(jsonObject.toString());
+        return requestCall(requestSpecification, Method.POST, uri);
+    }
+    public static Response postCallWithCookie(JsonObject jsonObject, String projectId,String uri,String token) {
+        RequestSpecification requestSpecification = getRequestSpecificationObject();
+        requestSpecification.pathParam("projectId",projectId);
+        String cookie= "token="+token;
+        requestSpecification.cookie("PL","rancher");
+        requestSpecification.cookie("CSRF","F243AA6A11");
+        requestSpecification.cookie("token", token);
+
         requestSpecification.body(jsonObject.toString());
         return requestCall(requestSpecification, Method.POST, uri);
     }
