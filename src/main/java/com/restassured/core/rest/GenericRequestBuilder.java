@@ -1,5 +1,7 @@
 package com.restassured.core.rest;
 
+import com.google.gson.JsonObject;
+import com.restassured.utils.ConfigProperties;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.Header;
@@ -12,11 +14,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public  class GenericRequestBuilder {
-public static RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+public  static RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
+public  static ConfigProperties configProperties = ConfigProperties.getInstance();
+
     public static RequestSpecification getRequestSpecificationObject() {
         requestSpecBuilder.setRelaxedHTTPSValidation();
-        requestSpecBuilder.addHeader("Content-Type", "application/json");
-        requestSpecBuilder.setContentType("application/json");
+        requestSpecBuilder.setPort(Integer.parseInt(getPort()));
+        requestSpecBuilder.setBasePath(getBasePath());
+        requestSpecBuilder.addHeader("content-type", "application/json");
+        requestSpecBuilder.addHeader("accept","application/json");
         return requestSpecBuilder.build();
     }
     public  static Response requestCall(RequestSpecification requestSpecification, Method method, String uri) {
@@ -38,5 +44,27 @@ public static RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
             curlBuilder.append("--data-raw '"+((RequestSpecificationImpl) requestSpecification).getBody()+"' ");
         return curlBuilder.toString();
     }
+    public static Response postCall(JsonObject jsonObject, String projectId,String uri) {
+        RequestSpecification requestSpecification = getRequestSpecificationObject();
+        requestSpecification.pathParam("projectId",projectId);
+        requestSpecification.body(jsonObject.toString());
+        return requestCall(requestSpecification, Method.POST, uri);
+    }
+    public static String getBasePath(){
+        String basePath = null;
+        if(System.getProperty("env.type").equals("QA")){
+            basePath=configProperties.getConfig("QA_BASE_URI");
+        }
+        return basePath;
+    }
+    public static String getPort(){
+        String portnumber = "";
+        if(System.getProperty("env.type").equals("QA")){
+             portnumber = configProperties.getConfig("QA_PORTNUMBER");
+        }
+        System.out.println("The port number is:" + portnumber);
+        return portnumber;
+    }
+
 
 }

@@ -10,8 +10,8 @@ public abstract class CoreUtils {
         return configProperties.getConfig("QA_BASE_URI")+":"+configProperties.getConfig("QA_PORTNUMBER");
     }
 
-    private String getPortNumber() {
-        return configProperties.getConfig("QA_PORTNUMBER");
+    public int getPortNumber() {
+        return Integer.parseInt(configProperties.getConfig("QA_PORTNUMBER"));
     }
 
     public String getUserName() {
@@ -21,4 +21,6 @@ public abstract class CoreUtils {
     public String getPassword() {
        return configProperties.getConfig("QA_PASSWORD");
     }
+
+
 }

@@ -11,6 +11,8 @@ import java.util.HashMap;
 @Slf4j
 public class LoginHelper extends CoreUtils {
     public String URL;
+    public int port;
+
     public String userName;
     public String password;
     public RestAssuredClient restClient = new RestAssuredClient();
@@ -19,6 +21,7 @@ public class LoginHelper extends CoreUtils {
         this.URL = getEnvironmentURL();
         this.userName= getUserName();
         this.password= getPassword();
+        this.port=getPortNumber();
     }
 
     public Response getLogin(){

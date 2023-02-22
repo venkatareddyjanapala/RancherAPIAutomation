@@ -2,7 +2,7 @@ package com.restassured.utils;
 
 import java.util.Properties;
 
-    public class ConfigProperties {
+    public  class ConfigProperties {
         private static ConfigProperties SINGLE_INSTANCE = null;
         private ConfigProperties() {
         }
