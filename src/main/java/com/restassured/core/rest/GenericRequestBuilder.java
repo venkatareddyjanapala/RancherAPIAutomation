@@ -3,7 +3,6 @@ package com.restassured.core.rest;
 import com.google.gson.JsonObject;
 import com.restassured.utils.ConfigProperties;
 import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.http.Method;
@@ -14,18 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public  class GenericRequestBuilder {
-public  static RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
 public  static ConfigProperties configProperties = ConfigProperties.getInstance();
-
+static  RestAssuredClient restAssuredClient  = new RestAssuredClient();
     public static RequestSpecification getRequestSpecificationObject() {
-        requestSpecBuilder.setRelaxedHTTPSValidation();
-        requestSpecBuilder.setPort(Integer.parseInt(getPort()));
-        requestSpecBuilder.setBaseUri(getBasePath());
-        requestSpecBuilder.setBasePath("/v2-beta/");
-        requestSpecBuilder.addHeader("content-type", "application/json");
-        requestSpecBuilder.addHeader("accept","application/json");
-        return requestSpecBuilder.build();
+        RequestSpecification requestSpecification = restAssuredClient.getRequestSpecification();
+        return requestSpecification;
     }
+
     public  static Response requestCall(RequestSpecification requestSpecification, Method method, String uri) {
         log.info("");
         Response responseData = RestAssured.given().spec(requestSpecification).log().all().request(method, uri);
@@ -47,13 +41,13 @@ public  static ConfigProperties configProperties = ConfigProperties.getInstance(
             curlBuilder.append("--data-raw '"+((RequestSpecificationImpl) requestSpecification).getBody()+"' ");
         return curlBuilder.toString();
     }
-    public static Response postCall(JsonObject jsonObject, String projectId,String uri) {
+    public  Response postCall(JsonObject jsonObject, String projectId,String uri) {
         RequestSpecification requestSpecification = getRequestSpecificationObject();
         requestSpecification.pathParam("projectId",projectId);
         requestSpecification.body(jsonObject.toString());
         return requestCall(requestSpecification, Method.POST, uri);
     }
-    public static Response postCallWithCookie(JsonObject jsonObject, String projectId,String uri,String token) {
+    public  Response postCallWithCookie(JsonObject jsonObject, String projectId,String uri,String token) {
         RequestSpecification requestSpecification = getRequestSpecificationObject();
         requestSpecification.pathParam("projectId",projectId);
         String cookie= "token="+token;
@@ -79,6 +73,4 @@ public  static ConfigProperties configProperties = ConfigProperties.getInstance(
         System.out.println("The port number is:" + portnumber);
         return portnumber;
     }
-
-
 }

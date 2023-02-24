@@ -8,24 +8,20 @@ import org.testng.annotations.Test;
 import java.io.FileNotFoundException;
 
 public class LoginTests extends TestBase {
-    LoginHelper loginHelper = new LoginHelper();
+   LoginHelper loginHelper = new LoginHelper();
     StackHelpers stackHelpers = new StackHelpers();
     @Test(description = "verifyLogin")
     public void verifyLogin() {
-        loginHelper.getEnvironmentDetails();
-        Response response = loginHelper.getLogin();
-        String token=response.jsonPath().getString("jwt");
-        System.out.println("The token is:" + token);
+      loginHelper.getEnvironmentDetails();
+     Response response = loginHelper.getLogin();
+     String token=response.jsonPath().getString("jwt");
+     System.out.println("The token is:" + token);
     }
 
-    @Test(description = "verifyLogin")
+    @Test(description = "createStack")
     public void createStack() throws FileNotFoundException {
-        loginHelper.getEnvironmentDetails();
-        Response response = loginHelper.getLogin();
-        String token=response.jsonPath().getString("jwt");
-        System.out.println("The token is:" + token);
         String projectName="1a5";
         String stackName="myStackVenkat";
-        stackHelpers.createStack(projectName,stackName,token);
+        stackHelpers.createStack(projectName,stackName);
     }
 }
